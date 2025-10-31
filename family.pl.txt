@@ -1,0 +1,15 @@
+% Facts
+male(john).  male(bill).  male(bob).
+female(mary).  female(sue).
+
+father(john, bill).
+father(bill, bob).
+mother(mary, bob).
+mother(mary, sue).
+
+% Rules
+brother(X,Y):- male(X), father(F,X), father(F,Y), X\=Y.
+sister(X,Y):- female(X), father(F,X), father(F,Y), X\=Y.
+grandfather(X,Y):- father(X,Z), father(Z,Y); father(X,Z), mother(Z,Y).
+grandchild(X,Y):- grandfather(Y,X).
+uncle(X,Y):- male(X), brother(X,Z), (father(Z,Y); mother(Z,Y)).
